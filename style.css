@@ -1,0 +1,12 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.heading{
+    background-color: rgb(178, 114, 239);
+    color: #ffff;
+    text-align: center;
+    height: 10vh;
+}
