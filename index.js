@@ -84,3 +84,17 @@ document.getElementById("addBookBtn").addEventListener('click', () =>{
 
 
 });
+
+
+//Remove Book button
+
+document.getElementById("removeBookBtn").addEventListener('click', () =>{
+    
+    const title = document.getElementById("bookTitle").value;
+    if(title){
+        library.removeBook(title);
+        document.getElementById('bookTitle').value = '';
+    }else{
+        alert('Please enter a book title to remove');
+    }
+});
