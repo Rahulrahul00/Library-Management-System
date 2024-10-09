@@ -5,8 +5,15 @@
 }
 
 .heading{
-    background-color: rgb(178, 114, 239);
+    background-color: rgb(125, 8, 235);
     color: #ffff;
     text-align: center;
     height: 10vh;
+}
+.libOuput {
+    width: 100%;
+    height: auto;
+    background-color: rgb(208, 152, 252);
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color: #000000;
 }
