@@ -1,6 +1,6 @@
 // Person class reprsent a generic person
 
-class person{
+class Person{
     constructor(name){
         this.name = name;
     }
@@ -61,7 +61,55 @@ class Library{
 }
 
 
+// students class for borrowing and return books
+
+class Student extends Person{
+    constructor(name){
+        super(name);
+        this.borrowedBooks = [];
+
+
+    }
+    borrowBook(title,library){
+        if(library.isBookAvailable(title)){
+            this.borrowedBooks.push(title);
+            library.removeBook(title);
+            this.displayBorrowedBooks();
+        }else{
+            alert(`${title} is not available in the libraary.` )
+        }
+    }
+
+
+    returnBook(title,library){
+        const index = this.borrowedBooks.indexOf(title);
+        if(index !== -1){
+            this.borrowedBooks.splice(index,1);
+            library.addBook(new Book(title,author));
+            this.displayBorrowedBooks();
+        }else{
+            alert(`${title} is not borrowed`);
+        }
+    }
+
+
+    // Method to display the  borrowed books by the student
+
+    displayBorrowedBooks(){
+        const borrowedList = document.getElementById('borrowedBooks');
+        borrowedList.innerHTML = '',
+        this.borrowedBooks.forEach(bookTitle =>{
+            const li = document.createElement('li');
+            li.textContent = bookTitle;
+            borrowedList.appendChild(li);
+        });
+    }
+
+}
+
+
 const library = new Library();
+const student = new Student("rahul");
 
 
 // Event Listener
@@ -83,4 +131,44 @@ document.getElementById("addBookBtn").addEventListener('click', () =>{
 
 
 
+});
+
+
+//Remove Book button
+
+document.getElementById("removeBookBtn").addEventListener('click', () =>{
+    
+    const title = document.getElementById("bookTitle").value;
+    if(title){
+        library.removeBook(title);
+        document.getElementById('bookTitle').value = '';
+    }else{
+        alert('Please enter a book title to remove');
+    }
+});
+
+// Borrow Book button
+
+document.getElementById("borrowBookBtn").addEventListener('click', ()=>{
+    const title = document.getElementById("borrowBookTitle").value;
+
+    if(title){
+        student.borrowBook(title,library);
+        document.getElementById('borrowBookTitle').value = '';
+
+    }else{
+        alert('please enter a book title to borrow');
+    }
+});
+
+// return book button event
+
+document.getElementById('returnBookBtn').addEventListener('click', () => {
+    const title = document.getElementById('returnBookTitle').value;
+    if(title){
+        student.returnBook(title, library);
+        document.getElementById('returnBookTitle').value = '';
+    }else{
+        alert('Please enter a book title to return');
+    }
 });
